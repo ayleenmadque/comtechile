@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>eLearning | Comte Chile</title>
+  <meta name="description" content="Plataforma de formación en analítica, automatización y datos para organizaciones del sector público y educación. Cursos prácticos en Power BI, Power Automate y más." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect x='5' y='55' width='22' height='40' rx='4' fill='%23ffe92e' stroke='%23000' stroke-width='4'/><rect x='39' y='32' width='22' height='63' rx='4' fill='%23ff5964' stroke='%23000' stroke-width='4'/><rect x='73' y='10' width='22' height='85' rx='4' fill='%2363c5ee' stroke='%23000' stroke-width='4'/></svg>" />
+  <style>
+    :root {
+      --bg: #f6f7fb;
+      --white: #ffffff;
+      --ink: #0f1117;
+      --muted: #596171;
+      --line: #e2e6ee;
+      --yellow: #ffe92e;
+      --red: #ff5964;
+      --blue: #63c5ee;
+      --radius: 28px;
+      --shadow: 0 24px 70px rgba(15, 17, 23, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background: radial-gradient(circle at 84% 42%, rgba(99,197,238,.14), transparent 28%), var(--bg);
+      line-height: 1.45;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .page {
+      width: min(1180px, calc(100% - 44px));
+      margin: 0 auto;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(246,247,251,.86);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      height: 92px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .brand { display: flex; align-items: center; flex-shrink: 0; }
+
+    .logo { display: flex; align-items: flex-end; gap: 18px; }
+    .bars { display: flex; align-items: flex-end; gap: 7px; }
+    .bar { width: 22px; border: 3px solid black; border-radius: 4px; box-sizing: border-box; box-shadow: 2px 2px 0px black; }
+    .yellow { height: 30px; background: #fff52e; }
+    .red    { height: 41px; background: #ff5b66; }
+    .blue   { height: 52px; background: #6ecbf2; }
+    .text { font-size: 38px; font-weight: 900; line-height: 0.9; letter-spacing: -2px; color: black; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      color: #262b36;
+      font-size: 16px;
+      font-weight: 650;
+    }
+
+    .nav-links a.active {
+      color: var(--ink);
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 2px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px 22px;
+      border-radius: 10px;
+      font-weight: 800;
+      color: #fff;
+      background: linear-gradient(180deg, #17191f, #050608);
+      border: 1px solid #050608;
+      box-shadow: 0 15px 34px rgba(15,17,23,.18);
+      transition: transform .2s ease, box-shadow .2s ease;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 16px;
+    }
+
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 20px 42px rgba(15,17,23,.24); }
+    .btn.secondary { background: transparent; color: var(--ink); box-shadow: none; border: 1.5px solid var(--line); }
+    .btn.secondary:hover { background: rgba(0,0,0,.04); }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 8px;
+      background: none;
+      border: none;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2.5px;
+      background: var(--ink);
+      border-radius: 2px;
+      transition: all .3s ease;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 92px;
+      left: 0;
+      right: 0;
+      background: rgba(246,247,251,.97);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
+      padding: 24px;
+      z-index: 19;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-size: 18px;
+      font-weight: 700;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .mobile-menu .btn { margin-top: 8px; text-align: center; justify-content: center; }
+
+    /* ── SECCIONES ── */
+    section { padding: 82px 0; scroll-margin-top: 92px; }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(42px, 5vw, 70px);
+      line-height: .96;
+      letter-spacing: -3px;
+      font-weight: 950;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 32px;
+      margin-bottom: 48px;
+    }
+    .section-head p { max-width: 520px; margin: 0; color: var(--muted); font-size: 18px; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: calc(100vh - 92px);
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      align-items: center;
+      gap: 40px;
+      padding: 82px 0 72px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      padding: 11px 18px;
+      margin-bottom: 38px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.76);
+      border: 1px solid var(--line);
+      color: #4b5363;
+      font-size: 17px;
+      font-weight: 800;
+      box-shadow: 0 10px 28px rgba(15,17,23,.04);
+    }
+
+    .traffic { display: inline-flex; gap: 11px; }
+    .traffic span { width: 14px; height: 14px; border-radius: 50%; display: block; }
+    .traffic span:nth-child(1) { background: var(--red); }
+    .traffic span:nth-child(2) { background: var(--yellow); }
+    .traffic span:nth-child(3) { background: var(--blue); }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(46px, 5.8vw, 76px);
+      line-height: .98;
+      letter-spacing: -3.5px;
+      font-weight: 950;
+      max-width: 680px;
+    }
+
+    .gradient-word {
+      display: inline;
+      background: linear-gradient(90deg, #e84d70, #9c79d0, #65c3ef);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      max-width: 580px;
+      margin: 28px 0 34px;
+      color: var(--muted);
+      font-size: 19px;
+      line-height: 1.55;
+    }
+
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    /* Stats hero */
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      margin-top: 48px;
+      padding-top: 36px;
+      border-top: 1px solid var(--line);
+      flex-wrap: wrap;
+    }
+    .hero-stat-num {
+      font-size: 36px;
+      font-weight: 950;
+      letter-spacing: -2px;
+      line-height: 1;
+    }
+    .hero-stat-lbl {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* Visual hero */
+    .hero-visual {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .course-preview {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .cp-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .cp-title { font-size: 14px; font-weight: 800; }
+    .cp-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+    .cp-badge.basico  { background: rgba(99,197,238,.12); color: #1a7fa0; }
+    .cp-badge.inter   { background: rgba(255,233,46,.2);  color: #7a6800; }
+    .cp-badge.avanzado { background: rgba(255,89,100,.1);  color: #b52d38; }
+
+    .cp-modules { padding: 14px 20px; display: flex; flex-direction: column; gap: 8px; }
+    .cp-mod {
+      display: grid;
+      grid-template-columns: 30px 1fr auto;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: var(--bg);
+    }
+    .cp-mod-icon {
+      width: 30px; height: 30px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      font-size: 14px;
+      font-weight: 900;
+      color: #fff;
+    }
+    .cp-mod-name { font-size: 13px; font-weight: 700; }
+    .cp-mod-sub  { font-size: 11px; color: var(--muted); font-weight: 600; }
+    .cp-mod-status {
+      font-size: 10px; font-weight: 800;
+      padding: 3px 8px; border-radius: 999px;
+      white-space: nowrap;
+    }
+    .s-done    { background: rgba(99,197,238,.12); color: #1a7fa0; }
+    .s-active  { background: rgba(255,89,100,.1);  color: #b52d38; }
+    .s-pending { background: var(--line); color: var(--muted); }
+
+    .cp-footer {
+      padding: 12px 20px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .cp-footer-label { font-size: 11px; font-weight: 700; color: var(--muted); white-space: nowrap; }
+    .cp-footer-bar   { flex: 1; height: 6px; border-radius: 99px; background: var(--line); overflow: hidden; }
+    .cp-footer-fill  { height: 100%; border-radius: 99px; background: var(--blue); }
+    .cp-footer-pct   { font-size: 12px; font-weight: 800; color: var(--blue); white-space: nowrap; }
+
+    .cert-mini {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .cert-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: rgba(255,233,46,.2);
+      border: 1.5px solid rgba(255,233,46,.5);
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .cert-name { font-size: 14px; font-weight: 800; }
+    .cert-sub  { font-size: 12px; color: var(--muted); font-weight: 600; margin-top: 2px; }
+
+    /* ── CURSOS ── */
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+
+    .course-card {
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.85);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .course-card:hover { transform: translateY(-4px); box-shadow: 0 36px 90px rgba(15,17,23,.12); }
+
+    .cc-thumb {
+      height: 100px;
+      display: grid;
+      place-items: center;
+      font-size: 36px;
+    }
+    .cc-thumb.t-blue   { background: rgba(99,197,238,.12); }
+    .cc-thumb.t-yellow { background: rgba(255,233,46,.15); }
+    .cc-thumb.t-red    { background: rgba(255,89,100,.1); }
+    .cc-thumb.t-green  { background: rgba(99,220,130,.12); }
+    .cc-thumb.t-purple { background: rgba(155,100,220,.1); }
+    .cc-thumb.t-gray   { background: rgba(89,97,113,.08); }
+
+    .cc-body { padding: 20px 22px; flex: 1; display: flex; flex-direction: column; gap: 8px; }
+    .cc-badge {
+      display: inline-block;
+      font-size: 11px; font-weight: 700;
+      padding: 3px 10px; border-radius: 999px;
+      align-self: flex-start;
+    }
+    .cc-badge.basico   { background: rgba(99,197,238,.12); color: #1a7fa0; }
+    .cc-badge.inter    { background: rgba(255,233,46,.2);  color: #7a6800; }
+    .cc-badge.avanzado { background: rgba(255,89,100,.1);  color: #b52d38; }
+
+    .cc-title { font-size: 20px; font-weight: 900; letter-spacing: -.5px; margin: 0; }
+    .cc-desc  { font-size: 15px; color: var(--muted); margin: 0; line-height: 1.5; flex: 1; }
+    .cc-meta  { font-size: 13px; color: var(--muted); font-weight: 700; margin-top: 4px; }
+
+    .tag-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .tag {
+      padding: 6px 11px;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    /* ── RUTAS ── */
+    .rutas-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+
+    .ruta-card {
+      padding: 30px;
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.85);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .ruta-card:hover { transform: translateY(-4px); box-shadow: 0 36px 90px rgba(15,17,23,.12); }
+
+    .ruta-icon {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-size: 26px;
+    }
+    .ri-yellow { background: rgba(255,233,46,.2);  border: 1.5px solid rgba(255,233,46,.5); }
+    .ri-blue   { background: rgba(99,197,238,.15); border: 1.5px solid rgba(99,197,238,.4); }
+    .ri-red    { background: rgba(255,89,100,.12); border: 1.5px solid rgba(255,89,100,.3); }
+    .ri-green  { background: rgba(99,220,130,.15); border: 1.5px solid rgba(99,220,130,.4); }
+
+    .ruta-card h3 { margin: 0; font-size: 26px; letter-spacing: -1px; font-weight: 900; }
+    .ruta-card p  { margin: 0; color: var(--muted); font-size: 16px; line-height: 1.55; }
+
+    .ruta-steps { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+    .ruta-step {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+    .ruta-num {
+      width: 26px; height: 26px;
+      border-radius: 8px;
+      background: var(--ink);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 900;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    /* ── MÉTRICAS ── */
+    .metrics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+
+    .metric-card {
+      padding: 32px 28px;
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.85);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .metric-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+    }
+    .metric-card:nth-child(1)::before { background: var(--yellow); }
+    .metric-card:nth-child(2)::before { background: var(--red); }
+    .metric-card:nth-child(3)::before { background: var(--blue); }
+    .metric-card:nth-child(4)::before { background: var(--ink); }
+
+    .metric-number {
+      font-size: clamp(40px, 4vw, 58px);
+      font-weight: 950;
+      letter-spacing: -3px;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .metric-label { color: var(--muted); font-size: 15px; font-weight: 700; }
+
+    /* ── CTA ── */
+    .cta {
+      margin: 0 auto;
+      padding: 56px;
+      max-width: 1100px;
+      border-radius: 32px;
+      background: var(--ink);
+      color: #fff;
+      overflow: hidden;
+      position: relative;
+    }
+    .cta::before {
+      content: "";
+      position: absolute;
+      width: 420px; height: 420px;
+      left: -100px; bottom: -180px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(99,197,238,.28), transparent 68%);
+    }
+    .cta::after {
+      content: "";
+      position: absolute;
+      width: 310px; height: 310px;
+      right: -70px; top: -120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,89,100,.42), transparent 68%);
+    }
+    .cta-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 44px;
+      align-items: center;
+    }
+    .cta h2 { font-size: clamp(40px, 4.4vw, 62px); line-height: .95; letter-spacing: -3px; color: #fff; }
+    .cta p  { max-width: 620px; margin-top: 18px; color: rgba(255,255,255,.78); font-size: 17px; }
+    .btn-white {
+      padding: 16px 32px;
+      border-radius: 12px;
+      background: #fff;
+      color: var(--ink);
+      border: none;
+      font-weight: 800;
+      font-size: 16px;
+      font-family: inherit;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 8px 24px rgba(0,0,0,.2);
+      white-space: nowrap;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(0,0,0,.28); }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 34px 0 54px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+    .footer-links { display: flex; gap: 20px; align-items: center; }
+    .footer-links a { font-size: 14px; transition: color .2s; }
+    .footer-links a:hover { color: var(--ink); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-visual { display: none; }
+      .grid-3 { grid-template-columns: 1fr; }
+      .rutas-grid { grid-template-columns: 1fr; }
+      .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+      .section-head { display: block; }
+      .section-head p { margin-top: 16px; }
+      .cta { padding: 36px 28px; }
+      .cta-inner { grid-template-columns: 1fr; }
+      h1 { letter-spacing: -3px; }
+      h2 { letter-spacing: -2px; }
+    }
+
+    @media (max-width: 500px) {
+      .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="page nav">
+      <a href="/" class="brand" aria-label="Comte Chile">
+        <div class="logo">
+          <div class="bars">
+            <div class="bar yellow"></div>
+            <div class="bar red"></div>
+            <div class="bar blue"></div>
+          </div>
+          <div class="text">comte</div>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="/#nosotros">Quiénes somos</a>
+        <a href="/#servicios">Servicios</a>
+        <a href="/#metodologia">Metodología</a>
+        <a href="/#proyectos">Proyectos</a>
+        <a href="/#clientes">Clientes</a>
+        <a href="/elearning" class="active">eLearning</a>
+        <a href="/#contacto" class="btn">Agendar reunión</a>
+      </nav>
+
+      <button class="hamburger" id="hamburger" aria-label="Menú" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- MENÚ MÓVIL -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/#nosotros"    onclick="closeMenu()">Quiénes somos</a>
+    <a href="/#servicios"   onclick="closeMenu()">Servicios</a>
+    <a href="/#metodologia" onclick="closeMenu()">Metodología</a>
+    <a href="/#proyectos"   onclick="closeMenu()">Proyectos</a>
+    <a href="/#clientes"    onclick="closeMenu()">Clientes</a>
+    <a href="/elearning"    onclick="closeMenu()">eLearning</a>
+    <a href="/#contacto" class="btn" onclick="closeMenu()">Agendar reunión</a>
+  </div>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="page hero">
+      <div>
+        <div class="eyebrow">
+          <span class="traffic"><span></span><span></span><span></span></span>
+          Plataforma de formación
+        </div>
+
+        <h1>Aprende a usar tus <span class="gradient-word">datos</span> con expertos.</h1>
+
+        <p>Cursos prácticos en analítica, automatización y gestión de información para equipos del sector público y educación.</p>
+
+        <div class="hero-actions">
+          <a href="#cursos" class="btn">Ver cursos</a>
+          <a href="#rutas" class="btn secondary">Rutas de aprendizaje</a>
+        </div>
+
+        <div class="hero-stats">
+          <div>
+            <div class="hero-stat-num">12+</div>
+            <div class="hero-stat-lbl">Cursos disponibles</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">300+</div>
+            <div class="hero-stat-lbl">Profesionales formados</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">100%</div>
+            <div class="hero-stat-lbl">Online y práctico</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="course-preview">
+          <div class="cp-header">
+            <div class="cp-title">Introducción a Power BI</div>
+            <div class="cp-badge basico">Básico</div>
+          </div>
+          <div class="cp-modules">
+            <div class="cp-mod">
+              <div class="cp-mod-icon" style="background:#63c5ee">1</div>
+              <div>
+                <div class="cp-mod-name">Conectar fuentes de datos</div>
+                <div class="cp-mod-sub">Power BI · 45 min</div>
+              </div>
+              <div class="cp-mod-status s-done">Completado</div>
+            </div>
+            <div class="cp-mod">
+              <div class="cp-mod-icon" style="background:#ff5964">2</div>
+              <div>
+                <div class="cp-mod-name">Crear visualizaciones</div>
+                <div class="cp-mod-sub">Power BI · 60 min</div>
+              </div>
+              <div class="cp-mod-status s-active">En curso</div>
+            </div>
+            <div class="cp-mod">
+              <div class="cp-mod-icon" style="background:#ffe92e;color:#111">3</div>
+              <div>
+                <div class="cp-mod-name">Dashboard interactivo</div>
+                <div class="cp-mod-sub">Power BI · 50 min</div>
+              </div>
+              <div class="cp-mod-status s-pending">Pendiente</div>
+            </div>
+          </div>
+          <div class="cp-footer">
+            <span class="cp-footer-label">Progreso</span>
+            <div class="cp-footer-bar"><div class="cp-footer-fill" style="width:42%"></div></div>
+            <span class="cp-footer-pct">42%</span>
+          </div>
+        </div>
+
+        <div class="cert-mini">
+          <div class="cert-icon">🏅</div>
+          <div>
+            <div class="cert-name">Certificado de finalización</div>
+            <div class="cert-sub">Emitido al completar cada programa · Descargable en PDF</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MÉTRICAS -->
+    <section style="padding: 64px 0;">
+      <div class="page metrics-grid">
+        <div class="metric-card">
+          <div class="metric-number">12+</div>
+          <div class="metric-label">Cursos disponibles</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-number">300+</div>
+          <div class="metric-label">Profesionales formados</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-number">8</div>
+          <div class="metric-label">Semanas por programa</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-number">100%</div>
+          <div class="metric-label">Online a tu ritmo</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CURSOS -->
+    <section id="cursos" style="padding: 82px 0;">
+      <div class="page">
+        <div class="section-head">
+          <h2>Cursos<br>destacados</h2>
+          <p>Formación práctica alineada al ecosistema Microsoft y a los procesos reales de las organizaciones.</p>
+        </div>
+        <div class="grid-3">
+
+          <div class="course-card">
+            <div class="cc-thumb t-blue">📊</div>
+            <div class="cc-body">
+              <span class="cc-badge basico">Básico</span>
+              <h3 class="cc-title">Introducción a Power BI</h3>
+              <p class="cc-desc">Conecta datos, crea visualizaciones y publica tu primer dashboard institucional.</p>
+              <div class="cc-meta">6 módulos · 8 horas</div>
+              <div class="tag-list">
+                <span class="tag">Power BI</span>
+                <span class="tag">Visualización</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="course-card">
+            <div class="cc-thumb t-yellow">⚡</div>
+            <div class="cc-body">
+              <span class="cc-badge inter">Intermedio</span>
+              <h3 class="cc-title">Power Automate para equipos</h3>
+              <p class="cc-desc">Automatiza flujos de aprobación, notificaciones y tareas repetitivas sin código.</p>
+              <div class="cc-meta">5 módulos · 6 horas</div>
+              <div class="tag-list">
+                <span class="tag">Power Automate</span>
+                <span class="tag">SharePoint</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="course-card">
+            <div class="cc-thumb t-red">🏛️</div>
+            <div class="cc-body">
+              <span class="cc-badge avanzado">Avanzado</span>
+              <h3 class="cc-title">Dashboards para municipios</h3>
+              <p class="cc-desc">Indicadores de gestión municipal, ejecución presupuestaria y seguimiento de contratos.</p>
+              <div class="cc-meta">8 módulos · 12 horas</div>
+              <div class="tag-list">
+                <span class="tag">Power BI</span>
+                <span class="tag">DAX</span>
+                <span class="tag">Sector público</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="course-card">
+            <div class="cc-thumb t-green">📁</div>
+            <div class="cc-body">
+              <span class="cc-badge basico">Básico</span>
+              <h3 class="cc-title">SharePoint para equipos</h3>
+              <p class="cc-desc">Organiza documentos, gestiona permisos y colabora en tiempo real con tu equipo.</p>
+              <div class="cc-meta">4 módulos · 5 horas</div>
+              <div class="tag-list">
+                <span class="tag">SharePoint</span>
+                <span class="tag">Microsoft 365</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="course-card">
+            <div class="cc-thumb t-purple">🗄️</div>
+            <div class="cc-body">
+              <span class="cc-badge inter">Intermedio</span>
+              <h3 class="cc-title">Gestión de datos públicos</h3>
+              <p class="cc-desc">Modela, limpia y estructura datos institucionales para análisis y reportes automatizados.</p>
+              <div class="cc-meta">7 módulos · 10 horas</div>
+              <div class="tag-list">
+                <span class="tag">Power Query</span>
+                <span class="tag">Excel</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="course-card">
+            <div class="cc-thumb t-gray">🎓</div>
+            <div class="cc-body">
+              <span class="cc-badge avanzado">Avanzado</span>
+              <h3 class="cc-title">Adopción digital institucional</h3>
+              <p class="cc-desc">Diseña e implementa programas de capacitación para llevar la transformación digital a toda tu organización.</p>
+              <div class="cc-meta">9 módulos · 14 horas</div>
+              <div class="tag-list">
+                <span class="tag">Change management</span>
+                <span class="tag">Capacitación</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- RUTAS DE APRENDIZAJE -->
+    <section id="rutas" style="padding: 82px 0; background: rgba(255,255,255,.6);">
+      <div class="page">
+        <div class="section-head">
+          <h2>Rutas de<br>aprendizaje</h2>
+          <p>Programas estructurados según tu perfil y rol dentro de la organización.</p>
+        </div>
+        <div class="rutas-grid">
+
+          <div class="ruta-card">
+            <div class="ruta-icon ri-blue">📊</div>
+            <h3>Analítica de datos</h3>
+            <p>Para equipos que quieren transformar reportes manuales en decisiones estratégicas apoyadas en datos.</p>
+            <div class="ruta-steps">
+              <div class="ruta-step"><div class="ruta-num">1</div>Introducción a Power BI</div>
+              <div class="ruta-step"><div class="ruta-num">2</div>Gestión de datos públicos</div>
+              <div class="ruta-step"><div class="ruta-num">3</div>Dashboards para municipios</div>
+            </div>
+            <div class="tag-list">
+              <span class="tag">Power BI</span>
+              <span class="tag">DAX</span>
+              <span class="tag">Power Query</span>
+            </div>
+          </div>
+
+          <div class="ruta-card">
+            <div class="ruta-icon ri-yellow">⚡</div>
+            <h3>Automatización</h3>
+            <p>Para quienes buscan eliminar tareas manuales y conectar sistemas con flujos inteligentes.</p>
+            <div class="ruta-steps">
+              <div class="ruta-step"><div class="ruta-num">1</div>SharePoint para equipos</div>
+              <div class="ruta-step"><div class="ruta-num">2</div>Power Automate para equipos</div>
+            </div>
+            <div class="tag-list">
+              <span class="tag">Power Automate</span>
+              <span class="tag">SharePoint</span>
+              <span class="tag">Microsoft 365</span>
+            </div>
+          </div>
+
+          <div class="ruta-card">
+            <div class="ruta-icon ri-red">🏛️</div>
+            <h3>Gestión pública digital</h3>
+            <p>Para funcionarios públicos que lideran proyectos de modernización y transformación digital en sus instituciones.</p>
+            <div class="ruta-steps">
+              <div class="ruta-step"><div class="ruta-num">1</div>Gestión de datos públicos</div>
+              <div class="ruta-step"><div class="ruta-num">2</div>Dashboards para municipios</div>
+              <div class="ruta-step"><div class="ruta-num">3</div>Adopción digital institucional</div>
+            </div>
+            <div class="tag-list">
+              <span class="tag">Sector público</span>
+              <span class="tag">Power BI</span>
+            </div>
+          </div>
+
+          <div class="ruta-card">
+            <div class="ruta-icon ri-green">🎓</div>
+            <h3>Formación de instructores</h3>
+            <p>Para quienes deben replicar y escalar la capacitación dentro de sus propias organizaciones.</p>
+            <div class="ruta-steps">
+              <div class="ruta-step"><div class="ruta-num">1</div>Introducción a Power BI</div>
+              <div class="ruta-step"><div class="ruta-num">2</div>Power Automate para equipos</div>
+              <div class="ruta-step"><div class="ruta-num">3</div>Adopción digital institucional</div>
+            </div>
+            <div class="tag-list">
+              <span class="tag">Capacitación</span>
+              <span class="tag">Change management</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section style="padding: 58px 0 70px;">
+      <div class="page">
+        <div class="cta">
+          <div class="cta-inner">
+            <div>
+              <h2>¿Tu organización necesita capacitación a medida?</h2>
+              <p>Diseñamos programas formativos según los procesos, herramientas y objetivos específicos de tu institución.</p>
+            </div>
+            <a href="/#contacto" class="btn-white">Agendar reunión</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="page">
+    <span>© 2026 Comte Chile</span>
+    <div class="footer-links">
+      <a href="/">Inicio</a>
+      <a href="/#servicios">Servicios</a>
+      <a href="/#contacto">Contacto</a>
+      <a href="mailto:contacto@comtechile.cl">contacto@comtechile.cl</a>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('mobileMenu');
+      const btn  = document.getElementById('hamburger');
+      menu.classList.toggle('open');
+      btn.classList.toggle('open');
+    }
+    function closeMenu() {
+      document.getElementById('mobileMenu').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+    }
+  </script>
+</body>
+</html>
