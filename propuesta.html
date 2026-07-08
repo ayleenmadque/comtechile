@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Propuesta Comercial | Comte Chile</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect x='5' y='55' width='22' height='40' rx='4' fill='%23ffe92e' stroke='%23000' stroke-width='4'/><rect x='39' y='32' width='22' height='63' rx='4' fill='%23ff5964' stroke='%23000' stroke-width='4'/><rect x='73' y='10' width='22' height='85' rx='4' fill='%2363c5ee' stroke='%23000' stroke-width='4'/></svg>" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Inter, Arial, Helvetica, sans-serif; background: #f6f7fb; color: #0f1117; }
+
+    header {
+      background: rgba(246,247,251,.92);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid #e2e6ee;
+      padding: 0 5vw;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand { display: flex; align-items: flex-end; gap: 14px; text-decoration: none; }
+    .bars { display: flex; align-items: flex-end; gap: 6px; }
+    .bar { border: 2.5px solid #000; border-radius: 3px; }
+    .b1 { width: 18px; height: 24px; background: #fff52e; }
+    .b2 { width: 18px; height: 33px; background: #ff5b66; }
+    .b3 { width: 18px; height: 42px; background: #6ecbf2; }
+    .brand-name { font-size: 30px; font-weight: 900; letter-spacing: -1.5px; color: #000; line-height: 1; }
+
+    .header-right { display: flex; align-items: center; gap: 16px; }
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #0f1117;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 800;
+      font-family: inherit;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 8px 24px rgba(15,17,23,.18);
+    }
+    .download-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(15,17,23,.24); }
+    .download-icon { font-size: 16px; }
+
+    .pdf-wrapper {
+      width: 100%;
+      height: calc(100vh - 72px);
+    }
+
+    .pdf-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    .fallback {
+      display: none;
+      text-align: center;
+      padding: 60px 20px;
+    }
+    .fallback p { font-size: 16px; color: #596171; margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="/" class="brand" aria-label="Comte Chile">
+      <div class="bars">
+        <div class="bar b1"></div>
+        <div class="bar b2"></div>
+        <div class="bar b3"></div>
+      </div>
+      <div class="brand-name">comte</div>
+    </a>
+    <div class="header-right">
+      <a class="download-btn" href="/COMTE_Brochure.pdf" download="COMTE_Brochure.pdf">
+        <span class="download-icon">↓</span> Descargar PDF
+      </a>
+    </div>
+  </header>
+
+  <div class="pdf-wrapper">
+    <iframe
+      src="/COMTE_Brochure.pdf"
+      title="Propuesta Comercial Comte Chile"
+    ></iframe>
+  </div>
+
+</body>
+</html>
