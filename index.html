@@ -320,6 +320,85 @@
     /* ── SERVICIOS ── */
     .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
 
+    /* Nuevo layout horizontal por servicio */
+    .services-stack { display: flex; flex-direction: column; margin-top: 40px; }
+
+    .service-row {
+      display: flex;
+      align-items: stretch;
+      min-height: 260px;
+      border-top: 1px solid var(--line);
+    }
+    .service-row:last-child { border-bottom: 1px solid var(--line); }
+    .service-row.reverse { flex-direction: row-reverse; }
+
+    .service-visual {
+      flex: 0 0 40%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+    }
+    .service-visual.accent-yellow { background: #fffbe6; }
+    .service-visual.accent-red    { background: #fff1f2; }
+    .service-visual.accent-blue   { background: #eef8fd; }
+
+    .service-visual canvas { display: block; border-radius: 12px; }
+
+    .service-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 48px 52px;
+    }
+
+    .service-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 6px;
+      margin-bottom: 16px;
+      width: fit-content;
+    }
+    .service-tag.tag-yellow { background: var(--yellow); color: #5a4800; }
+    .service-tag.tag-red    { background: var(--red);    color: #fff; }
+    .service-tag.tag-blue   { background: var(--blue);   color: #0b3d54; }
+
+    .service-body h3 {
+      font-size: clamp(20px, 2vw, 26px);
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      margin-bottom: 14px;
+      line-height: 1.2;
+    }
+    .service-body p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.65;
+      max-width: 480px;
+      margin-bottom: 22px;
+    }
+    .service-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .s-pill {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 100px;
+      border: 1.5px solid var(--line);
+      color: var(--muted);
+      background: var(--white);
+    }
+
+    @media (max-width: 760px) {
+      .service-row, .service-row.reverse { flex-direction: column; }
+      .service-visual { flex: none; min-height: 180px; }
+      .service-body { padding: 28px 24px; }
+    }
+
     .service-card {
       min-height: 310px;
       padding: 30px;
@@ -1001,29 +1080,96 @@
         <p style="margin:20px 0 0;color:var(--muted);font-size:18px;line-height:1.6;max-width:100%;">Consultoría, automatización y capacitación para instituciones públicas y organizaciones educativas que quieren tomar mejores decisiones con sus datos.</p>
       </div>
 
-      <div class="grid-3">
-        <article class="service-card">
-          <div>
-            <h3>Business Intelligence</h3>
-            <p>Convertimos los datos de tu institución en paneles ejecutivos con Power BI que muestran el estado real de la organización (presupuesto, indicadores, avance de proyectos) accesibles para quienes toman decisiones, sin necesitar conocimientos técnicos.</p>
-          </div>
-        </article>
+      <div class="services-stack">
 
-        <article class="service-card">
-          <div>
-            <h3>Automatización</h3>
-            <p>Identificamos los procesos que tu equipo repite manualmente (reportes, consolidación de datos, notificaciones, flujos de aprobación) y los automatizamos con Power Automate, SharePoint y Excel para reducir errores y liberar tiempo.</p>
+        <!-- Business Intelligence -->
+        <div class="service-row">
+          <div class="service-visual accent-yellow">
+            <canvas id="svc1" width="220" height="160"></canvas>
           </div>
-        </article>
+          <div class="service-body">
+            <span class="service-tag tag-yellow">Business Intelligence</span>
+            <h3>Tus datos, convertidos en decisiones ejecutivas.</h3>
+            <p>Construimos paneles con Power BI que muestran el estado real de tu organización. Presupuesto, indicadores y avance de proyectos, accesibles para quienes toman decisiones sin necesitar conocimientos técnicos.</p>
+            <div class="service-pills">
+              <span class="s-pill">Power BI</span>
+              <span class="s-pill">Dashboards ejecutivos</span>
+              <span class="s-pill">Indicadores de gestión</span>
+            </div>
+          </div>
+        </div>
 
-        <article class="service-card">
-          <div>
-            <h3>Capacitación aplicada</h3>
-            <p>Programas prácticos para equipos que necesitan aprender herramientas tecnológicas (Excel, Power BI, Microsoft 365 e IA) con ejercicios reales de gestión.</p>
+        <!-- Automatización -->
+        <div class="service-row reverse">
+          <div class="service-visual accent-red">
+            <canvas id="svc2" width="220" height="160"></canvas>
           </div>
-        </article>
+          <div class="service-body">
+            <span class="service-tag tag-red">Automatización</span>
+            <h3>Menos tareas manuales, más tiempo para lo que importa.</h3>
+            <p>Identificamos los procesos que tu equipo repite manualmente y los automatizamos con Power Automate, SharePoint y Excel para reducir errores y liberar tiempo.</p>
+            <div class="service-pills">
+              <span class="s-pill">Power Automate</span>
+              <span class="s-pill">SharePoint</span>
+              <span class="s-pill">Excel</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Capacitación -->
+        <div class="service-row">
+          <div class="service-visual accent-blue">
+            <canvas id="svc3" width="220" height="160"></canvas>
+          </div>
+          <div class="service-body">
+            <span class="service-tag tag-blue">Capacitación aplicada</span>
+            <h3>Equipos que aprenden haciendo, no viendo.</h3>
+            <p>Programas prácticos para equipos que necesitan dominar herramientas tecnológicas con ejercicios reales de gestión. Excel, Power BI, Microsoft 365 e IA aplicada.</p>
+            <div class="service-pills">
+              <span class="s-pill">Excel avanzado</span>
+              <span class="s-pill">Power BI</span>
+              <span class="s-pill">Microsoft 365</span>
+              <span class="s-pill">IA aplicada</span>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
+
+    <script>
+    (function(){
+      function rr(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath();}
+
+      // BI: barras
+      var c1=document.getElementById('svc1'),ctx=c1.getContext('2d'),W=c1.width,H=c1.height;
+      ctx.fillStyle='#fffbe6';ctx.fillRect(0,0,W,H);
+      ctx.fillStyle='#fff';rr(ctx,10,10,W-20,H-20,10);ctx.fill();
+      ctx.fillStyle='#e2e6ee';ctx.fillRect(22,24,80,8);ctx.fillRect(22,36,50,6);
+      [[22,60],[58,80],[94,50],[130,95],[166,70]].forEach(function(b){ctx.fillStyle='#ffe92e';ctx.fillRect(b[0],H-40-b[1],28,b[1]);});
+      ctx.strokeStyle='#e2e6ee';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(15,H-40);ctx.lineTo(W-15,H-40);ctx.stroke();
+
+      // Automatización: flujo
+      var c2=document.getElementById('svc2'),ctx2=c2.getContext('2d'),W2=c2.width,H2=c2.height;
+      ctx2.fillStyle='#fff1f2';ctx2.fillRect(0,0,W2,H2);
+      [[18,'Reporte\nmanual','#ffd6d8','#596171'],[82,'Flujo\nautomático','#ff5964','#fff'],[146,'Resultado\ninstantáneo','#ff5964','#fff']].forEach(function(s,i){
+        ctx2.fillStyle=s[2];rr(ctx2,s[0],H2/2-36,56,72,8);ctx2.fill();
+        ctx2.fillStyle=s[3];ctx2.font='9px Arial';ctx2.textAlign='center';
+        s[1].split('\n').forEach(function(l,li){ctx2.fillText(l,s[0]+28,H2/2-36+30+li*13);});
+        if(i<2){ctx2.strokeStyle='#e2e6ee';ctx2.lineWidth=1.5;ctx2.beginPath();ctx2.moveTo(s[0]+60,H2/2);ctx2.lineTo(s[0]+76,H2/2);ctx2.stroke();ctx2.fillStyle='#e2e6ee';ctx2.beginPath();ctx2.moveTo(s[0]+80,H2/2);ctx2.lineTo(s[0]+74,H2/2-4);ctx2.lineTo(s[0]+74,H2/2+4);ctx2.fill();}
+      });
+
+      // Capacitación: pantalla
+      var c3=document.getElementById('svc3'),ctx3=c3.getContext('2d'),W3=c3.width,H3=c3.height;
+      ctx3.fillStyle='#eef8fd';ctx3.fillRect(0,0,W3,H3);
+      ctx3.fillStyle='#fff';rr(ctx3,20,20,140,90,8);ctx3.fill();
+      ctx3.strokeStyle='#63c5ee';ctx3.lineWidth=2;rr(ctx3,20,20,140,90,8);ctx3.stroke();
+      ctx3.fillStyle='#63c5ee';ctx3.fillRect(34,36,60,6);
+      ctx3.fillStyle='#e2e6ee';ctx3.fillRect(34,48,100,5);ctx3.fillRect(34,58,80,5);ctx3.fillRect(34,68,90,5);
+      ctx3.fillStyle='#ffe92e';ctx3.beginPath();ctx3.arc(142,36,5,0,Math.PI*2);ctx3.fill();
+      [170,187,204].forEach(function(x){ctx3.fillStyle='#c8e8f5';ctx3.beginPath();ctx3.arc(x,50,10,0,Math.PI*2);ctx3.fill();rr(ctx3,x-11,63,22,22,4);ctx3.fill();});
+    })();
+    </script>
 
     <!-- METODOLOGÍA -->
     <section class="page" id="metodologia">
