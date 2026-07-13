@@ -321,28 +321,32 @@
     .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
 
     /* Contexto de servicios */
-    .svc-context { max-width: 680px; margin-bottom: 56px; }
-    .svc-eyebrow { font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
-    .svc-context h2 { font-size: clamp(28px, 3vw, 40px); font-weight: 900; letter-spacing: -1px; line-height: 1.15; margin-bottom: 20px; }
-    .svc-intro { font-size: 17px; color: var(--muted); line-height: 1.7; }
+    .svc-context { max-width: 780px; margin-bottom: 72px; }
+    .svc-eyebrow { font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; }
+    .svc-context h2 { font-size: clamp(32px, 4vw, 52px); font-weight: 900; letter-spacing: -2px; line-height: 1.1; margin-bottom: 24px; }
+    .svc-intro { font-size: 18px; color: var(--muted); line-height: 1.75; }
 
     /* Lista vertical de servicios */
     .services-stack { display: flex; flex-direction: column; }
 
     .svc-item {
       display: grid;
-      grid-template-columns: 220px 1fr;
-      gap: 40px;
-      padding: 36px 0;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      padding: 64px 0;
       border-top: 1px solid var(--line);
       align-items: start;
     }
     .svc-item:last-child { border-bottom: 1px solid var(--line); }
 
-    .svc-item-body p { font-size: 15px; color: var(--muted); line-height: 1.65; margin-bottom: 18px; max-width: 560px; }
+    .svc-item-header { padding-top: 6px; }
+    .svc-item-header .service-tag { margin-bottom: 20px; }
+    .svc-item-header h3 { font-size: clamp(26px, 3vw, 38px); font-weight: 900; letter-spacing: -1px; line-height: 1.15; }
 
-    @media (max-width: 640px) {
-      .svc-item { grid-template-columns: 1fr; gap: 12px; }
+    .svc-item-body p { font-size: 17px; color: var(--muted); line-height: 1.75; margin-bottom: 28px; }
+
+    @media (max-width: 760px) {
+      .svc-item { grid-template-columns: 1fr; gap: 24px; padding: 40px 0; }
     }
 
     .service-row {
@@ -1108,6 +1112,7 @@
         <div class="svc-item">
           <div class="svc-item-header">
             <span class="service-tag tag-yellow">Business Intelligence</span>
+            <h3>Tus datos, convertidos en decisiones ejecutivas.</h3>
           </div>
           <div class="svc-item-body">
             <p>Construimos paneles con Power BI que muestran el estado real de tu organización. Presupuesto, indicadores y avance de proyectos, accesibles para quienes toman decisiones sin necesitar conocimientos técnicos.</p>
@@ -1122,6 +1127,7 @@
         <div class="svc-item">
           <div class="svc-item-header">
             <span class="service-tag tag-red">Automatización</span>
+            <h3>Menos tareas manuales, más tiempo para lo que importa.</h3>
           </div>
           <div class="svc-item-body">
             <p>Identificamos los procesos que tu equipo repite manualmente y los automatizamos con Power Automate, SharePoint y Excel para reducir errores y liberar tiempo.</p>
@@ -1136,6 +1142,7 @@
         <div class="svc-item">
           <div class="svc-item-header">
             <span class="service-tag tag-blue">Capacitación aplicada</span>
+            <h3>Equipos que aprenden haciendo, no viendo.</h3>
           </div>
           <div class="svc-item-body">
             <p>Programas prácticos para equipos que necesitan dominar herramientas tecnológicas con ejercicios reales de gestión. Excel, Power BI, Microsoft 365 e IA aplicada.</p>
