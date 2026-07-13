@@ -56,11 +56,12 @@
 
     .nav {
       height: 92px;
-      display: flex;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
       align-items: center;
-      justify-content: space-between;
       gap: 28px;
     }
+    .nav-links { justify-content: center; }
 
     .brand { display: flex; align-items: center; flex-shrink: 0; }
 
