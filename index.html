@@ -338,16 +338,16 @@
       gap: 80px;
       padding: 64px 0;
       border-top: 1px solid var(--line);
-      align-items: center;
+      align-items: start;
       width: 100%;
     }
     .svc-item:last-child { border-bottom: 1px solid var(--line); }
 
-    .svc-item-header { padding-top: 6px; }
-    .svc-item-header .service-tag { margin-bottom: 20px; }
-    .svc-item-header h3 { font-size: clamp(26px, 3vw, 38px); font-weight: 900; letter-spacing: -1px; line-height: 1.15; }
+    .svc-item-header { display: flex; flex-direction: column; gap: 12px; }
+    .svc-item-header h3 { font-size: clamp(26px, 3vw, 38px); font-weight: 900; letter-spacing: -1px; line-height: 1.15; margin: 0; }
 
-    .svc-item-body p { font-size: 17px; color: var(--muted); line-height: 1.75; margin-bottom: 28px; text-align: justify; }
+    .svc-item-body { display: flex; flex-direction: column; gap: 20px; }
+    .svc-item-body p { font-size: 17px; color: var(--muted); line-height: 1.75; margin: 0; text-align: justify; }
 
     @media (max-width: 760px) {
       .svc-item { grid-template-columns: 1fr; gap: 24px; padding: 40px 0; }
