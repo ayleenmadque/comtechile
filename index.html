@@ -540,6 +540,53 @@
       letter-spacing: -1px;
     }
 
+    /* ── ECOSISTEMA ── */
+    .eco-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
+
+    .eco-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 32px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .eco-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+
+    .eco-card-top { display: flex; align-items: center; justify-content: space-between; }
+    .eco-date { font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+    .eco-card h3 { font-size: 20px; font-weight: 900; letter-spacing: -0.5px; margin: 0; }
+    .eco-card p { font-size: 14px; color: var(--muted); line-height: 1.6; margin: 0; flex: 1; }
+    .eco-cta { font-size: 13px; font-weight: 700; color: var(--ink); text-decoration: underline; margin-top: 8px; }
+
+    .eco-modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15,17,23,.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    .eco-modal-overlay.open { display: flex; }
+    .eco-modal {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 48px;
+      max-width: 640px;
+      width: calc(100% - 48px);
+      max-height: 80vh;
+      overflow-y: auto;
+      position: relative;
+    }
+    .eco-close { position: absolute; top: 20px; right: 24px; background: none; border: none; font-size: 20px; cursor: pointer; color: var(--muted); }
+    .eco-modal h3 { font-size: 26px; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 8px; }
+    .eco-modal .eco-date { display: block; margin-bottom: 20px; }
+    .eco-modal p { font-size: 16px; color: var(--muted); line-height: 1.75; text-align: justify; }
+
     /* ── CONTACTO ── */
     .contact-section { padding-top: 58px; padding-bottom: 70px; }
 
@@ -1365,6 +1412,45 @@
       </div>
     </section>
 
+    <!-- ECOSISTEMA -->
+    <section class="page" id="ecosistema" style="scroll-margin-top:92px;">
+      <div class="section-head" style="display:block;margin-bottom:48px;">
+        <p style="font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:16px;">Presencia</p>
+        <h2>COMTE en el ecosistema</h2>
+        <p style="margin-top:16px;font-size:17px;color:var(--muted);line-height:1.65;max-width:600px;">Participamos activamente en eventos, seminarios y encuentros del ecosistema de datos, tecnología y gestión pública.</p>
+      </div>
+
+      <div class="eco-grid">
+
+        <div class="eco-card" onclick="openEco(0)">
+          <div class="eco-card-top">
+            <span class="eco-date">Julio 2026</span>
+          </div>
+          <h3>Smart City Expo Santiago</h3>
+          <p>Descripción del evento próximamente.</p>
+          <span class="eco-cta">Leer nota</span>
+        </div>
+
+        <div class="eco-card" onclick="openEco(1)">
+          <div class="eco-card-top">
+            <span class="eco-date">Julio 2026</span>
+          </div>
+          <h3>Seminario</h3>
+          <p>Descripción del evento próximamente.</p>
+          <span class="eco-cta">Leer nota</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Modal ecosistema -->
+    <div class="eco-modal-overlay" id="ecoOverlay" onclick="closeEco()">
+      <div class="eco-modal" onclick="event.stopPropagation()">
+        <button class="eco-close" onclick="closeEco()">&#x2715;</button>
+        <div id="ecoModalContent"></div>
+      </div>
+    </div>
+
     <!-- CONTACTO -->
     <section class="page contact-section" id="contacto">
       <div class="cta">
@@ -1641,6 +1727,36 @@
       // Muestra confirmación
       document.getElementById('formContainer').style.display = 'none';
       document.getElementById('formSuccess').style.display = 'block';
+    }
+  </script>
+
+  <script>
+    var ecoData = [
+      {
+        title: 'Smart City Expo Santiago',
+        date: 'Julio 2026',
+        body: 'Nota completa próximamente.'
+      },
+      {
+        title: 'Seminario',
+        date: 'Julio 2026',
+        body: 'Nota completa próximamente.'
+      }
+    ];
+
+    function openEco(i) {
+      var d = ecoData[i];
+      document.getElementById('ecoModalContent').innerHTML =
+        '<span class="eco-date">' + d.date + '</span>' +
+        '<h3>' + d.title + '</h3>' +
+        '<p>' + d.body + '</p>';
+      document.getElementById('ecoOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeEco() {
+      document.getElementById('ecoOverlay').classList.remove('open');
+      document.body.style.overflow = '';
     }
   </script>
 </body>
