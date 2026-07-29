@@ -37,7 +37,7 @@
     button { cursor: pointer; font-family: inherit; }
 
     .page {
-      width: min(1180px, calc(100% - 44px));
+      width: min(1440px, calc(100% - 80px));
       margin: 0 auto;
     }
 
@@ -69,13 +69,16 @@
     .text { font-size: 38px; font-weight: 900; line-height: 0.9; letter-spacing: -2px; color: black; }
 
     .nav-links {
+      flex: 1;
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 18px;
       color: #262b36;
       font-size: 14px;
       font-weight: 650;
       white-space: nowrap;
+      margin-top: 18px;
     }
 
     .nav-links a.active {
@@ -573,10 +576,11 @@
         <a href="/metodologia">Metodología</a>
         <a href="/proyectos">Proyectos</a>
         <a href="/clientes">Clientes</a>
+        <a href="/ecosistema">COMTE en el ecosistema</a>
         <a href="/elearning" class="active">eLearning</a>
         <a href="/propuesta">Propuesta</a>
-        <a href="/#contacto" class="btn">Agendar reunión</a>
       </nav>
+      <a href="/#contacto" class="btn">Agendar reunión</a>
 
       <button class="hamburger" id="hamburger" aria-label="Menú" onclick="toggleMenu()">
         <span></span><span></span><span></span>
